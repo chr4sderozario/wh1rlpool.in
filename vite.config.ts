@@ -12,4 +12,16 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  vite: {
+    plugins: [
+      // This tells Lovable's built-in Nitro engine to bundle the site for Vercel
+      {
+        name: "force-vercel-preset",
+        config(config) {
+          if (!config.nitro) config.nitro = {};
+          config.nitro.preset = "vercel";
+        },
+      },
+    ],
+  },
 });
